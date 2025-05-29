@@ -21,7 +21,7 @@ Description:
     Index Factory Class
 """
 
-from aixplain.modules.model.index_model import IndexModel
+from aixplain.modules.model.index_models.index_model import IndexModel
 from aixplain.factories import ModelFactory
 from aixplain.enums import Function, ResponseStatus, SortBy, SortOrder, OwnershipType, Supplier, IndexStores, EmbeddingModel
 from typing import Text, Union, List, Tuple, Optional, TypeVar, Generic
@@ -29,13 +29,10 @@ from aixplain.factories.index_factory.utils import BaseIndexParams
 
 T = TypeVar("T", bound=BaseIndexParams)
 
-import os
-from aixplain.utils.file_utils import _request_with_retry
-from urllib.parse import urljoin
 
 def validate_embedding_model(model_id) -> bool:
-        model = ModelFactory.get(model_id)
-        return model.function == Function.TEXT_EMBEDDING
+    model = ModelFactory.get(model_id)
+    return model.function == Function.TEXT_EMBEDDING
 
 
 class IndexFactory(ModelFactory, Generic[T]):
